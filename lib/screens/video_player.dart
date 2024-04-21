@@ -10,9 +10,9 @@ class VideoPlayer extends StatelessWidget {
   final Video video;
 
   const VideoPlayer({
-    Key? key,
+    super.key,
     required this.video,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

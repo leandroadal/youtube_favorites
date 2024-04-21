@@ -1,17 +1,17 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:fav_youtube_with_bloc/api.dart';
-import 'package:fav_youtube_with_bloc/models/video.dart';
+import 'package:fav_youtube_with_bloc/models/search.dart';
+import 'package:flutter/material.dart';
 
 class VideosBloc implements BlocBase {
   Api? api;
 
-  List<Video> videos = [];
+  List<SearchVideo> videos = [];
 
-  final StreamController<List<Video>> _videosController =
-      StreamController<List<Video>>();
+  final StreamController<List<SearchVideo>> _videosController =
+      StreamController<List<SearchVideo>>();
 
   Stream get videosStream => _videosController.stream;
 

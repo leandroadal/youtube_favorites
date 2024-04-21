@@ -1,13 +1,16 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:fav_youtube_with_bloc/api.dart';
 import 'package:fav_youtube_with_bloc/bloc/favorite_bloc.dart';
-import 'package:fav_youtube_with_bloc/models/video.dart';
+import 'package:fav_youtube_with_bloc/models/search.dart';
 import 'package:fav_youtube_with_bloc/screens/video_player.dart';
 import 'package:flutter/material.dart';
+
+import '../models/video.dart';
 
 class VideoTile extends StatelessWidget {
   const VideoTile({super.key, required this.video});
 
-  final Video video;
+  final SearchVideo video;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +18,14 @@ class VideoTile extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => VideoPlayer(video: video),
-          ),
-        );
+        Api().videoInfo(video.id).then((value) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => VideoPlayer(video: value),
+            ),
+          );
+        });
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 4),
@@ -73,8 +78,11 @@ class VideoTile extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return IconButton(
-                        onPressed: () {
-                          bloc.toggleFavorite(video);
+                        onPressed: () async {
+                          await Api().videoInfo(video.id).then((value) {
+                            bloc.toggleFavorite(value);
+                          });
+                          //bloc.toggleFavorite(video);
                         },
                         icon: Icon(snapshot.data!.containsKey(video.id)
                             ? Icons.star

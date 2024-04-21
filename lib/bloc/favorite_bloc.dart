@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/search.dart';
 import '../models/video.dart';
 
 class FavoriteBloc implements BlocBase {
@@ -61,7 +62,7 @@ class FavoriteBloc implements BlocBase {
     _saveFavorites();
   }
 
-  bool isFavorite(Video video) {
+  bool isFavorite(SearchVideo video) {
     return _favorites.containsKey(video.id);
   }
 
