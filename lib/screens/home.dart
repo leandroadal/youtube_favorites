@@ -15,17 +15,17 @@ class MyHomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Container(
+        title: SizedBox(
           height: 25,
           child: Image.asset('images/yt_logo_rgb_dark.png'),
         ),
-        backgroundColor: Colors.black87,
+        backgroundColor: const Color(0xFF263238),
         actions: [
           Align(
             alignment: Alignment.center,
             child: StreamBuilder(
               stream: BlocProvider.getBloc<FavoriteBloc>().outFavorites,
-              initialData: {},
+              initialData: const {},
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Text(
@@ -45,7 +45,7 @@ class MyHomePage extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const FavoritesPage()));
             },
-            icon: Icon(Icons.star),
+            icon: const Icon(Icons.star),
           ),
           IconButton(
             onPressed: () async {
@@ -63,28 +63,40 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
-      backgroundColor: Colors.black87,
-      body: StreamBuilder(
-        stream: bloc.videosStream,
-        initialData: [],
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-                itemCount: snapshot.data!.length + 1, // +1 para o loading
-                itemBuilder: (context, index) {
-                  if (index < snapshot.data!.length) {
-                    return VideoTile(video: snapshot.data![index]);
-                  } else {
-                    bloc.inSearch.add('');
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                });
-          } else {
-            return Container();
-          }
-        },
+      //backgroundColor: Colors.black87,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF263238),
+              Color(0xFF1c1c1c),
+            ],
+          ),
+        ),
+        child: StreamBuilder(
+          stream: bloc.videosStream,
+          initialData: const [],
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: snapshot.data!.length + 1, // +1 para o loading
+                  itemBuilder: (context, index) {
+                    if (index < snapshot.data!.length) {
+                      return VideoTile(video: snapshot.data![index]);
+                    } else {
+                      bloc.inSearch.add('');
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  });
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
     );
   }
