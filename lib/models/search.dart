@@ -8,8 +8,6 @@ class SearchVideo {
   final String channelId;
   final String channelTitle;
 
-  // Constructor
-
   SearchVideo({
     required this.id,
     required this.title,

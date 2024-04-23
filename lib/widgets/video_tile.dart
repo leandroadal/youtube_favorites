@@ -28,7 +28,7 @@ class VideoTile extends StatelessWidget {
         });
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
+        margin: const EdgeInsets.symmetric(vertical: 4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -46,10 +46,10 @@ class VideoTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                         child: Text(
                           video.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -59,7 +59,7 @@ class VideoTile extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         child: Text(
                           video.channelTitle,
                           style: TextStyle(
@@ -82,7 +82,6 @@ class VideoTile extends StatelessWidget {
                           await Api().videoInfo(video.id).then((value) {
                             bloc.toggleFavorite(value);
                           });
-                          //bloc.toggleFavorite(video);
                         },
                         icon: Icon(snapshot.data!.containsKey(video.id)
                             ? Icons.star
@@ -90,12 +89,12 @@ class VideoTile extends StatelessWidget {
                         iconSize: 30,
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.more_vert),
+                  icon: const Icon(Icons.more_vert),
                   onPressed: () {},
                 ),
               ],

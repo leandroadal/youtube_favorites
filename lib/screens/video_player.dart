@@ -129,7 +129,6 @@ class VideoPlayer extends StatelessWidget {
             ),
           ],
         ),
-        //backgroundColor: Colors.black,
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -378,7 +377,6 @@ class VideoPlayer extends StatelessWidget {
                 ),
               ),
             ),
-            //const Divider(color: Colors.white60, height: 20),
           ],
         );
       },

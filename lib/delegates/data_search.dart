@@ -65,7 +65,6 @@ class DataSearch extends SearchDelegate<String> {
           ],
         ),
       ),
-      //color: Color(0xFF1c1c1c), // Cor de fundo cinza para toda a tela
       child: query.isEmpty
           ? Container() // Se não há texto na pesquisa, retorna um Container vazio
           : FutureBuilder(

@@ -63,7 +63,6 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
-      //backgroundColor: Colors.black87,
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(

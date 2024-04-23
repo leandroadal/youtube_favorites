@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/search.dart';
 import '../models/video.dart';
 
 class FavoriteBloc implements BlocBase {
@@ -35,20 +34,6 @@ class FavoriteBloc implements BlocBase {
           //transforma em uma string json
           prefs.setString('favorites', json.encode(_favorites)),
         });
-    //_favController.sink.add(_favorites);
-  }
-
-  void clearFavorites() {
-    _favorites = {};
-    _favController.sink.add(_favorites);
-    SharedPreferences.getInstance().then((prefs) {
-      prefs.remove('favorites');
-    });
-  }
-
-  void addFavorite(Video video) {
-    _favorites[video.id] = video;
-    _favController.sink.add(_favorites);
   }
 
   void toggleFavorite(Video video) {
@@ -60,14 +45,6 @@ class FavoriteBloc implements BlocBase {
     _favController.sink.add(_favorites);
 
     _saveFavorites();
-  }
-
-  bool isFavorite(SearchVideo video) {
-    return _favorites.containsKey(video.id);
-  }
-
-  List<Video> getFavorites() {
-    return _favorites.values.toList();
   }
 
   @override

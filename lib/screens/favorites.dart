@@ -19,13 +19,11 @@ class FavoritesPage extends StatelessWidget {
           style: TextStyle(
             color: Colors.white,
             fontSize: 22,
-            //fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
         backgroundColor: const Color(0xFF263238),
       ),
-      //backgroundColor: const Color(0xFF263238),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
