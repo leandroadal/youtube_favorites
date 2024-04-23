@@ -4,8 +4,8 @@ class Video {
   final String description;
   final String thumbnailUrl;
   final String videoUrl;
-  final int viewCount;
-  final int likeCount;
+  final String viewCount;
+  final String likeCount;
   final DateTime publishedAt;
   final String channelId;
   final String channelTitle;
@@ -31,13 +31,17 @@ class Video {
         description: json['snippet']['description'],
         thumbnailUrl: json['snippet']['thumbnails']['high']['url'],
         videoUrl: 'https://www.youtube.com/watch?v=${json['id']}',
-        viewCount: int.parse(json['statistics']['viewCount']),
-        likeCount: int.parse(json['statistics']['likeCount']),
+        viewCount: json['statistics'].containsKey('viewCount')
+            ? json['statistics']['viewCount']
+            : '', // Filmes pagos ou alugados não possuem views
+        likeCount: json['statistics'].containsKey('likeCount')
+            ? json['statistics']['likeCount']
+            : '',
         publishedAt: DateTime.parse(json['snippet']['publishedAt']),
         channelId: json['snippet']['channelId'],
         channelTitle: json['snippet']['channelTitle'],
       );
-    } else {
+    } else if (json.containsKey('videoId')) {
       return Video(
         // Quando iniciar o dispositivo os favoritos armazenados serão recuperados aqui
         id: json['videoId'],
@@ -51,6 +55,8 @@ class Video {
         channelId: json['channelId'],
         channelTitle: json['channelTitle'],
       );
+    } else {
+      throw Exception('Invalid JSON');
     }
   }
 
